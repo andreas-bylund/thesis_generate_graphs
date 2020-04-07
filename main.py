@@ -4,6 +4,8 @@ import pandas as pd
 import os
 from plotdata import PlotData
 from graph import Graph as gh
+from t_test import T_test
+import time
 
 
 def generate_graph(csv_file, save_path):
@@ -95,9 +97,22 @@ def main(custom_logs_folder_path):
                         save_path = path + '\\' + "graphs"
                         generate_graph(csv_file, save_path)
 
-
 if __name__ == "__main__":
-    # Where is Custom_logs folder located?
-    custom_logs_folder_path = r"C:\Users\Andreas Bylund\Desktop\Python charts\Custom_logs"
+    start_time = time.time()
 
-    main(custom_logs_folder_path)
+    # Where is Custom_logs folder located?
+    custom_logs_folder_path = r"C:\Users\Andreas Bylund\Desktop\Python T-test\Custom_logs"
+
+    # T-Test
+    T_test = T_test()
+
+    # Get folder and file information
+    folders = T_test.gather_folder_information(custom_logs_folder_path)
+
+    # Remove information which does not have any "Max_val_acc" value
+    folders = T_test.remove_folders_without_max_val_acc(folders)
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    print(folders)
+
+    #main(custom_logs_folder_path)
