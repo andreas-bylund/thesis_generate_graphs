@@ -86,7 +86,6 @@ def main(custom_logs_folder_path):
                         "_hyper" not in file and \
                         "_prediction" not in file: \
  \
-
                         # Create a folder that stores graphs
                         try:
                             os.mkdir(path + '\\' + "graphs")
@@ -96,6 +95,7 @@ def main(custom_logs_folder_path):
                         csv_file = path + '\\' + file
                         save_path = path + '\\' + "graphs"
                         generate_graph(csv_file, save_path)
+
 
 if __name__ == "__main__":
     start_time = time.time()
@@ -109,10 +109,6 @@ if __name__ == "__main__":
     # Get folder and file information
     folders = T_test.gather_folder_information(custom_logs_folder_path)
 
-    # Remove information which does not have any "Max_val_acc" value
-    folders = T_test.remove_folders_without_max_val_acc(folders)
     print("--- %s seconds ---" % (time.time() - start_time))
 
-    print(folders)
-
-    #main(custom_logs_folder_path)
+    # main(custom_logs_folder_path)
